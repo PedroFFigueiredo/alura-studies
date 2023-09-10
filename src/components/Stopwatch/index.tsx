@@ -7,9 +7,10 @@ import { useEffect, useState } from 'react';
 
 interface Props {
   select: ITasks | undefined
+  finishTask: () => void
 }
 
-export default function Stopwatch({ select }: Props) {
+export default function Stopwatch({ select, finishTask }: Props) {
   const [time, setTime] = useState<number>();
 
   useEffect(() => {
@@ -24,6 +25,7 @@ export default function Stopwatch({ select }: Props) {
         setTime(count - 1);
         return regressiva(count - 1);
       }
+      finishTask();
     }, 1000)
   }
 
