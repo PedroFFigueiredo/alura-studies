@@ -16,14 +16,24 @@ export default function Stopwatch({ select }: Props) {
     if (select?.time) {
       setTime(timeToSeconds(select.time))
     }
-  }, [select])
+  }, [select]);
+
+  function regressiva(count: number = 0) {
+    setTimeout(() => {
+      if (count > 0) {
+        setTime(count - 1);
+        return regressiva(count - 1);
+      }
+    }, 1000)
+  }
+
   return (
     <div className={styles.Stopwatch}>
       <p className={styles.title}>Ecolha um card e inicie o cronômetro</p>
       <div className={styles.clockWrapper}>
         <Clock time={time} />
       </div>
-      <Button>Começar</Button>
+      <Button onClick={() => regressiva(time)}>Começar</Button>
     </div >
   )
 }
